@@ -15,11 +15,14 @@ int s21_create_matrix(int rows, int columns, matrix_t *result) {
       result->matrix[i] = (double *)calloc(columns, sizeof(double));
       if (result->matrix[i] == NULL) {
         error = S21_INCORRECT_MATRIX;
-        s21_remove_matrix(result);
       }
     }
   } else {
     error = S21_INCORRECT_MATRIX;
+  }
+
+  if (error) {
+    s21_remove_matrix(result);
   }
 
   return error;
